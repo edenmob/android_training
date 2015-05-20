@@ -17,5 +17,5 @@
         android:text="@string/btn_send"
         android:id="@+id/button"
         android:layout_weight="1"
-        android:onClick="finishActivity"/>
+        />
 </LinearLayout>

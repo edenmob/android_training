@@ -1,10 +1,13 @@
 package com.example.training.helloandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -19,6 +22,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(savedInstanceState != null){
+            Log.d(TAG,savedInstanceState.toString());
+        }
+
         setContentView(R.layout.main_layout);
 
 
@@ -29,13 +36,29 @@ public class MainActivity extends Activity {
             }
         });
 
+        Button btnSend = (Button)findViewById(R.id.button);
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+                String message = ((EditText)(findViewById(R.id.editText))).getText().toString();
+                intent.putExtra("message",message);
+                startActivity(intent);
+            }
+        });
+
         //(new Thread().start();
     }
 
 
     public void finishActivity(View v){
         //finish();
-        Toast.makeText(this,"Toast", Toast.LENGTH_LONG).show();
+        /*Toast.makeText(this,"Going to next activity", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this,DetailActivity.class);
+        String message = ((EditText)(findViewById(R.id.editText))).getText().toString();
+        intent.putExtra("message",message);
+        startActivity(intent);*/
     }
 
     @Override
@@ -92,6 +115,9 @@ public class MainActivity extends Activity {
         super.onRestoreInstanceState(savedInstanceState);
 
         Log.d(TAG, "onRestoreInstanceState()");
+        if(savedInstanceState != null){
+            Log.d(TAG,savedInstanceState.toString());
+        }
     }
 
     @Override
@@ -99,5 +125,8 @@ public class MainActivity extends Activity {
         super.onSaveInstanceState(outState);
 
         Log.d(TAG, "onSaveInstanceState()");
+        if(outState != null){
+            Log.d(TAG,outState.toString());
+        }
     }
 }
